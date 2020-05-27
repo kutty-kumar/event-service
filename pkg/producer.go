@@ -6,10 +6,11 @@ import (
 	"github.com/golang/protobuf/ptypes"
 )
 
-func main(){
+func main() {
 	producerConfig := map[string]string{"bootstrap.servers": "localhost:9092"}
 	kafkaProducer := svc.NewKafkaProducer([]string{"doctor-created"}, producerConfig)
-	event := Event{EntityType: "doctor-created", EntityId: "1", Checksum: "doctor_created_1_checksum", CreatedAt: ptypes.TimestampNow()}
+	event := Event{EntityType: "doctor-created", EntityId: "1", Checksum: "doctor_created_1_checksum",
+		CreatedAt: ptypes.TimestampNow()}
 	kafkaProducer.Publish(event)
 	kafkaProducer.Close()
 }
